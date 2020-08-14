@@ -2,6 +2,7 @@
  * 全局的配置文件
  */
 const path = require("path");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   // 例如，部署在子域名下 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/
@@ -19,32 +20,67 @@ module.exports = {
   // 包含了 hash 的名字
   filenameHashing: true,
 
-  // 多页面配置
-  pages: undefined,
-  // pages: {
-  //   index: {
-  //     // page 的入口
-  //     entry: 'src/index/main.js',
-  //     // 模板来源
-  //     template: 'public/index.html',
-  //     // 在 dist/index.html 的输出
-  //     filename: 'index.html',
-  //     // 当使用 title 选项时，
-  //     // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-  //     title: 'Index Page',
-  //     // 在这个页面中包含的块，默认情况下会包含
-  //     // 提取出来的通用 chunk 和 vendor chunk。
-  //     chunks: ['chunk-vendors', 'chunk-common', 'index']
-  //   },
-  //   // 当使用只有入口的字符串格式时，
-  //   // 模板会被推导为 `public/subpage.html`
-  //   // 并且如果找不到的话，就回退到 `public/index.html`。
-  //   // 输出文件名会被推导为 `subpage.html`。
-  //   subpage: 'src/subpage/main.js'
-  // },
+  // 打包时候关闭productionSourceMap
+  productionSourceMap: process.env.NODE_ENV == "prod" ? false : true,
 
   // 是否开启eslint保存检测 ,它的有效值为 true || false || 'error'
   lintOnSave: false,
+
+  configureWebpack: (config) => {
+    // 生产环境相关配置
+    if (process.env.NODE_ENV == "prod") {
+      // 代码压缩
+      config.plugins.push(
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            //生产环境自动删除console
+            compress: {
+              drop_debugger: true,
+              drop_console: true,
+              pure_funcs: ["console.log"],
+            },
+          },
+          sourceMap: false,
+          parallel: true,
+        })
+      );
+    }
+
+    // 公共代码抽离
+    config.optimization = {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            chunks: "all",
+            test: /node_modules/,
+            name: "vendor",
+            minChunks: 1,
+            maxInitialRequests: 5,
+            minSize: 0,
+            priority: 100,
+          },
+          common: {
+            chunks: "all",
+            test: /[\\/]src[\\/]js[\\/]/,
+            name: "common",
+            minChunks: 2,
+            maxInitialRequests: 5,
+            minSize: 0,
+            priority: 60,
+          },
+          styles: {
+            name: "styles",
+            test: /\.(sa|sc|c)ss$/,
+            chunks: "all",
+            enforce: true,
+          },
+          runtimeChunk: {
+            name: "manifest",
+          },
+        },
+      },
+    };
+  },
 
   //服务器请求相关的配置
   devServer: {
@@ -57,7 +93,10 @@ module.exports = {
       //配置跨域
       "/Api": {
         //配置跨域的名字
-        target: process.env.NODE_ENV == "prod" ? process.env.VUE_APP_PROD : process.env.VUE_APP_DEV, //跨域的地址
+        target:
+          process.env.NODE_ENV == "prod"
+            ? process.env.VUE_APP_PROD
+            : process.env.VUE_APP_DEV, //跨域的地址
         ws: true,
         changOrigin: true, //是否跨域
         pathRewrite: {
@@ -70,15 +109,17 @@ module.exports = {
 
   // 存放第三方的插件
   pluginOptions: {
-    // 引入全局的 less 的样式
+    // 引入全局的公共的 less 样式
     "style-resources-loader": {
       preProcessor: "less",
       patterns: [path.resolve(__dirname, "./src/assets/style/common.less")],
     },
-     // 可以通过 less 文件覆盖（文件路径为绝对路径）
+    // 可以通过 less 文件覆盖（文件路径为绝对路径）
     less: {
       modifyVars: {
-        hack: `true; @import "${ [path.resolve(__dirname, "./src/assets/style/vantUi.less")] }";`,
+        hack: `true; @import "${[
+          path.resolve(__dirname, "./src/assets/style/vantUi.less"),
+        ]}";`,
       },
     },
   },
