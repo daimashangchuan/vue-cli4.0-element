@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import AppStore from "./AppStore";
+import AppStores from "./AppStores";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    AppStore,
+    AppStores,
   }
 });
