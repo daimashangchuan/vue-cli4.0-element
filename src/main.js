@@ -2,12 +2,18 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
 
+// 引入全局的ele组件
+import "./plugins/elements"
 
-Vue.config.productionTip = false;
-Vue.use(ElementUI);
+// 添加全局的样式变量
+import "./assets/style/reset.css";
+// 挂载公共的方法
+import { SessionUtil, LocalUtil, CookieUtil } from "./utils/caches";
+Vue.use(SessionUtil).use(LocalUtil).use(CookieUtil);
+// 全局过滤器 filter 
+import initFilters from './fliters';
+initFilters(Vue);
 
 new Vue({
   router,
