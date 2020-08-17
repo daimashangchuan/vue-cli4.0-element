@@ -2,15 +2,7 @@
  *  公用的工具方法
  */
 import Cookies from 'js-cookie';
-
-// 把字符串作为 URI 组件进行编码
-function encode(s) {
-  return encodeURIComponent(s);
-}
-// 对 encodeURIComponent() 函数编码的 URI 进行解码。
-function decode(s) {
-  return decodeURIComponent(s);
-}
+import { encode, decode } from "./util";
 
 /**
  * sessionStorage   添加    获取    删除

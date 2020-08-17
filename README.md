@@ -54,8 +54,12 @@ utils 公共的方法文件
 
 views 项目中的页面（组件）
   index   页面的主入口
+  userEnter/index 用户进入主体
   userEnter/login 登录
   userEnter/register 注册
+
+
+  
 ```
 
 

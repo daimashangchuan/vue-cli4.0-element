@@ -1,6 +1,15 @@
 import moment from "moment";
 
-function formatNumber(value) {
+// 把字符串作为 URI 组件进行编码
+export function encode(s) {
+  return encodeURIComponent(s);
+}
+// 对 encodeURIComponent() 函数编码的 URI 进行解码。
+export function decode(s) {
+  return decodeURIComponent(s);
+}
+
+export function formatNumber(value) {
   return (value < 10 ? "0" : "") + value;
 }
 /**

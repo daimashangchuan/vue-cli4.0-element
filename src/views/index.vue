@@ -3,7 +3,7 @@
     <el-container>
       <!-- 公共头部 -->
       <el-header>
-        <navHeader />
+        <appHeader />
       </el-header>
 
       <!-- 主体 -->
@@ -16,18 +16,18 @@
 
       <!-- 公共底部 -->
       <el-footer>
-        <navFooter />
+        <appFooter />
       </el-footer>
     </el-container>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import { AppService } from "@/api";
 import { mapState } from "vuex";
 export default {
   name: "index",
+  inject:['appReloadClick'],
   data() {
     return {
       requestData: {
@@ -48,11 +48,11 @@ export default {
     async getShop() {
       let {result} = await AppService.getShop(this.requestData);
       console.log(result);
-    },
+    }
   },
   components: {
-    navHeader: () => import("../components/nav-header"),
-    navFooter: () => import("../components/nav-footer")
+    appHeader: () => import("../components/app-header"),
+    appFooter: () => import("../components/app-footer")
   }
 };
 </script>
