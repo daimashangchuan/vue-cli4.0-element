@@ -14,10 +14,10 @@ export default {
     }
   },
   created() {
-    this.setAppPageShow({ isAppHeader: true, isAppFooter: true, isAppAside: true })
+    this.setAppPageShow({ isAppHeader: false, isAppFooter: false, isAppAside: false })
   },
   beforeDestroy() {
-    this.setAppPageShow({ isAppHeader: false, isAppFooter: false, isAppAside: false })
+    this.setAppPageShow({ isAppHeader: true, isAppFooter: true, isAppAside: true })
   },
   computed: {},
   methods: {

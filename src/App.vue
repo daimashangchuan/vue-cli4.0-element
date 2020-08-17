@@ -2,14 +2,14 @@
   <div id="app">
     <el-container>
       <!-- 公共头部 -->
-      <el-header v-if="!isAppHeader">
+      <el-header v-if="isAppHeader">
         <appHeader />
       </el-header>
 
       <!-- 主体 -->
       <el-container>
         <!-- 公共侧边栏 -->
-        <el-aside v-if="!isAppAside" style="width: 200px;">
+        <el-aside v-if="isAppAside" style="width: 200px;">
           <appAside />
         </el-aside>
         <!-- 内容 -->
@@ -22,7 +22,7 @@
       </el-container>
 
       <!-- 公共底部 -->
-      <el-footer v-if="!isAppFooter">
+      <el-footer v-if="isAppFooter">
         <appFooter />
       </el-footer>
     </el-container>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "App",
   provide() {
@@ -44,11 +44,7 @@ export default {
       isRouterAlive: true, //控制视图是否显示的变量
     };
   },
-  created() {
-    this.setAppPageShow({ isAppHeader: false, isAppFooter: false, isAppAside: false })
-  },
   methods: {
-    ...mapMutations("AppStores", ["setAppPageShow"]),
     appReloadClick() {
       this.isRouterAlive = false; //先关闭，
       this.$nextTick(function() {
