@@ -5,25 +5,30 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex"
+import { mapMutations } from "vuex"
 export default {
   name: "login",
   data() {
-    return {}
+    return {
+      query: this.$route.query
+    }
   },
-  mounted() {
-    this.setUserToken("111");
+  created() {
+    this.setAppPageShow({ isAppHeader: true, isAppFooter: true, isAppAside: true })
+  },
+  beforeDestroy() {
+    this.setAppPageShow({ isAppHeader: false, isAppFooter: false, isAppAside: false })
   },
   computed: {},
   methods: {
-    ...mapActions("AppStores", ["setUserToken" ]),
+    ...mapMutations("AppStores", ["setAppPageShow"]),
     getUserToken() {
-      console.log("www")
-      console.log(this.setUserToken)
-      
-      this.$router.push("/")
+      const callbackPath = this.query.callbackPath? this.query.callbackPath: '/';
+      // this.$router.replace(callbackPath);
+      this.$router.push(callbackPath);
     }
   },
+
 };
 </script>
 

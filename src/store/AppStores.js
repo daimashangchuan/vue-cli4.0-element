@@ -1,24 +1,19 @@
 const state = {
-  userInfo: null,
-  userToken: null
+  clientHeight: document.documentElement.clientHeight,
+  isAppHeader: false,
+  isAppFooter: false,
+  isAppAside: false
 };
 const mutations = {
-  GET_USERINFO(state, newState) {
-    state.userInfo = newState;
-  },
-  GET_USERTOKEN(state, newState) {
-    state.userToken = newState;
+  setAppPageShow(state, newState) {
+    console.log(newState)
+    state.isAppHeader = newState.isAppHeader;
+    state.isAppFooter = newState.isAppFooter;
+    state.isAppAside = newState.isAppAside;
   }
 };
-const actions = {
-  setUserInfo({ commit }, newState) {
-    commit("GET_USERINFO", newState);
-  },
-  setUserToken({ commit }, newState) {
-    commit("GET_USERTOKEN", newState);
-  }
-};
-const getters = {}
+const actions = {};
+const getters = {};
 
 export default {
   namespaced: true,

@@ -1,12 +1,12 @@
 <template>
-  <div class="userEnter">
-    用户进入主体
+  <div class="index">
+    欢迎
   </div>
 </template>
 
 <script>
 export default {
-  name: "userEnter",
+  name: "index",
   data() {
     return {}
   },

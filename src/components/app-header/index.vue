@@ -1,12 +1,12 @@
 <template>
-  <div class="header">
+  <div class="app-Header">
     
   </div>
 </template>
 
 <script>
 export default {
-  name: "navHeader",
+  name: "appHeader",
   data() {
     return {}
   },
