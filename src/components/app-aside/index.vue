@@ -1,75 +1,31 @@
 <template>
   <div class="appAside" :style="{ height: appHeight }">
-    <el-menu default-active="1-1" @open="handleOpen" @close="handleClose" :unique-opened="true">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-          <el-menu-item index="1-3">选项1</el-menu-item>
-          <el-menu-item index="1-4">选项2</el-menu-item>
-          <el-menu-item index="1-5">选项1</el-menu-item>
-          <el-menu-item index="1-6">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项1</el-menu-item>
-          <el-menu-item index="2-4">选项2</el-menu-item>
-          <el-menu-item index="2-5">选项1</el-menu-item>
-          <el-menu-item index="2-6">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-          <el-menu-item index="1-3">选项1</el-menu-item>
-          <el-menu-item index="1-4">选项2</el-menu-item>
-          <el-menu-item index="1-5">选项1</el-menu-item>
-          <el-menu-item index="1-6">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项1</el-menu-item>
-          <el-menu-item index="2-4">选项2</el-menu-item>
-          <el-menu-item index="2-5">选项1</el-menu-item>
-          <el-menu-item index="2-6">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-submenu index="4">
-        <template slot="title">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
-        </template>
-      </el-submenu>
+    <el-menu :default-active="defaultActive" @open="handleOpen" @close="handleClose" :unique-opened="true">
+      <div v-for="(menu,index) in menuData" :key="index">
+        <el-menu-item v-if="!menu.childs" :index="menu.value" :disabled='menu.disabled'>
+          <i :class="el-icon-document"></i>
+          <span slot="title">{{ menu.title }}</span>
+        </el-menu-item>
+      </div>
     </el-menu>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import menuData from "@/data/menu.js";
+
 export default {
   name: "appAside",
   data() {
     return {
+      defaultActive: "/auth",
+      menuData: menuData,
       appHeight: 0,
     };
   },
   created() {
-    this.appHeight = this.clientHeight - 120 + "px";
+    this.setAsideHeight()
   },
   computed: {
     ...mapState("AppStores", ["clientHeight"]),
@@ -81,6 +37,9 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
+    setAsideHeight() {
+      this.appHeight = this.clientHeight - 120 + "px";
+    }
   },
 };
 </script>

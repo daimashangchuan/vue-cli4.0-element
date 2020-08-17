@@ -31,8 +31,9 @@ assets 静态资源存放文件
   style 公共样式/默认的样式
 
 components 公共组件
-  navHeader.vue 公共头部
-  navFooter.vue 公共底部
+  app-header.vue 公共头部
+  app-footer.vue 公共底部
+  app-aside.vue 公共侧边栏
 
 filter 全局过滤器文件
   index.js 过滤器
@@ -50,16 +51,19 @@ store 项目的全局状态管理文件（vuex）
 
 utils 公共的方法文件
   caches.js 数据缓存方法
-  until.js 公共的方法
+  util.js 公共的方法
 
 views 项目中的页面（组件）
   index   页面的主入口
-  userEnter/index 用户进入主体
+  errorPages/404.vue 404报错页面
   userEnter/login 登录
   userEnter/register 注册
 
+App.vue 组件入口
+main.js js入口
 
-  
+.env.development  开发配置
+.env.production   生产配置
 ```
 
 
