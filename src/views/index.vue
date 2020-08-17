@@ -2,7 +2,9 @@
   <div class="container">
     <el-container>
       <!-- 公共头部 -->
-      <el-header>头部</el-header>
+      <el-header>
+        <navHeader />
+      </el-header>
 
       <!-- 主体 -->
       <el-container>
@@ -11,9 +13,11 @@
         <!-- 内容 -->
         <el-main>内容</el-main>
       </el-container>
-      
+
       <!-- 公共底部 -->
-      <el-footer>底部</el-footer>
+      <el-footer>
+        <navFooter />
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -42,10 +46,14 @@ export default {
   },
   methods: {
     async getShop() {
-      let {data} = await AppService.getShop(this.requestData);
-      console.log(data);
+      let {result} = await AppService.getShop(this.requestData);
+      console.log(result);
     },
   },
+  components: {
+    navHeader: () => import("../components/nav-header"),
+    navFooter: () => import("../components/nav-footer")
+  }
 };
 </script>
 

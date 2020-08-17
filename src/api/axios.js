@@ -3,8 +3,8 @@
  */
 import axios from "axios";
 import qs from "qs";
-import store from '@/store';
-
+// import store from '@/store';
+// store.dispatch("AppStore/setLoading", true);
 // 设置请求路径
 axios.defaults.baseURL = "";
 // 设置超时时间
@@ -27,11 +27,6 @@ axios.interceptors.request.use(
     request.headers["X-SZK-Token"] = "";
     request.headers["X-SZK-UUID"] = "";
 
-    // 动画效果
-    const loadingFlag = request.data.NoLoading;
-    if(!loadingFlag) {  
-      store.dispatch("AppStore/setLoading", true);
-    }
     return request;
   },
   error => {
@@ -42,11 +37,9 @@ axios.interceptors.request.use(
 // 响应 response 拦截器
 axios.interceptors.response.use(
   response => {
-    store.dispatch("AppStore/setLoading", false);
     return response.data.result;
   },
   error => {
-    store.dispatch("AppStore/setLoading", false);
     return Promise.reject(error);
   }
 );

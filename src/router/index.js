@@ -9,7 +9,17 @@ const routes = [
     name: "index",
     meta: { keepAlive: false },
     component: () => import("../views")
-  }
+  },{
+    path: "/login",
+    name: "login",
+    meta: { keepAlive: false },
+    component: () => import("../views/userEnter/login.vue")
+  },{
+    path: "/register",
+    name: "register",
+    meta: { keepAlive: false },
+    component: () => import("../views/userEnter/register.vue")
+  },
 ];
 
 const router = new VueRouter({
