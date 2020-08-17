@@ -5,7 +5,7 @@ import axios from "./axios";
 
 export default {
   async getShop(params) {
-    return axios.post(`接口路径`, params);
+    return axios.post(`/Api/getShopRecommendListForIndex`, params);
   },
 }
 

@@ -92,16 +92,13 @@ module.exports = {
     proxy: {
       //配置跨域
       "/Api": {
-        //配置跨域的名字
-        target:
-          process.env.NODE_ENV == "prod"
-            ? process.env.VUE_APP_PROD
-            : process.env.VUE_APP_DEV, //跨域的地址
+        //配置跨域的域名链接
+        target: process.env.NODE_ENV == "prod" ? process.env.VUE_APP_PROD : process.env.VUE_APP_DEV, //跨域的地址
         ws: true,
         changOrigin: true, //是否跨域
         pathRewrite: {
-          //当前的名字
-          "^/api": "/",
+          // key 前端设置的代理名字    value 为服务端提供的接口链接
+          "^/Api": "/Api/h5/m/p",
         },
       },
     },
