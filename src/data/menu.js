@@ -58,7 +58,7 @@ const menuData = [
       disabled: false,
       // 三级
       childs: [{
-        name: "integralManage",
+        name: "integral",
         icon: "el-icon-picture",
         title: "积分管理",
         path: "/integral",
@@ -68,14 +68,14 @@ const menuData = [
   }, 
   {
     // 一级
-    name: "contentManage",
+    name: "content",
     icon: "el-icon-rank",
     title: "分类管理",
     path: "",
     disabled: false,
     // 二级
     childs: [{
-      name: "classifyManage",
+      name: "classify",
       icon: "el-icon-printer",
       title: "分类管理",
       path: "/classify",

@@ -2,34 +2,37 @@
   <div class="appAside" :style="{ height: appHeight }">
     <el-menu :default-active="defaultActive" @open="handleOpen" @close="handleClose" :unique-opened="true">
       <div v-for="(menuOne,index) in menuData" :key="index">
-        <el-submenu :index="menuOne.path">
+        <!-- 多级 -->
+        <el-submenu v-if="menuOne.childs" :index="menuOne.name">
           <template slot="title">
             <i :class="menuOne.icon"></i>
-            <span slot="title">{{ menuOne.title }}</span>
+            <span>{{ menuOne.title }}</span>
           </template>
-          <el-menu-item @click="goRouterPath(menuOne.path)" v-if="!menuOne.childs" :index="menuOne.path" :disabled='menuOne.disabled'>
-            <i :class="menuOne.icon"></i>
-            <span slot="title">{{ menuOne.title }}</span>
-          </el-menu-item>
-        </el-submenu>
-        <!-- 一级路由 -->
-        <!-- <el-menu-item @click="goRouterPath(menuOne.path)" v-if="!menuOne.childs" :index="menuOne.path" :disabled='menuOne.disabled'>
-          <i :class="menuOne.icon"></i>
-          <span slot="title">{{ menuOne.title }}</span>
-        </el-menu-item> -->
-        <!-- 二级路由 -->
-        <!-- <template v-if="menuOne.childs">
-          <el-submenu v-for="(menuTwo,i) in menuOne" :key="i" :index="menuTwo.path">
-            <template slot="title">
-              <i :class="menuOne.icon"></i>
-              <span slot="title">{{ menuOne.title }}</span>
-            </template>
-            <el-menu-item @click="goRouterPath(menuTwo.path)" v-if="!menuTwo.childs" :index="menuTwo.path" :disabled='menuTwo.disabled'>
+          <div v-for="(menuTwo,i) in menuOne.childs" :key="i">
+            <!-- 三级 -->
+            <el-submenu v-if="menuTwo.childs" :index="menuTwo.name">
+              <template slot="title">
+                <i :class="menuTwo.icon"></i>
+                <span>{{ menuTwo.title }}</span>
+              </template>
+              <el-menu-item v-for="(menu,e ) in menuTwo.childs" :key="e" @click="goRouterPath(menu)" :index="menu.path" :disabled='menu.disabled'>
+                <i :class="menu.icon"></i>
+                <span>{{ menu.title }}</span>
+              </el-menu-item>
+            </el-submenu>
+
+            <!-- 二级 -->
+            <el-menu-item v-if="!menuTwo.childs" @click="goRouterPath(menuTwo)" :index="menuTwo.path" :disabled='menuTwo.disabled'>
               <i :class="menuTwo.icon"></i>
-              <span slot="title">{{ menuTwo.title }}</span>
+              <span>{{ menuTwo.title }}</span>
             </el-menu-item>
-          </el-submenu>
-        </template> -->
+          </div>
+        </el-submenu>
+        <!-- 只有一级 -->
+        <el-menu-item v-if="!menuOne.childs" @click="goRouterPath(menuOne)" :index="menuOne.path" :disabled='menuOne.disabled'>
+          <i :class="menuOne.icon"></i>
+          <span>{{ menuOne.title }}</span>
+        </el-menu-item>
       </div>
     </el-menu>
   </div>
@@ -43,7 +46,7 @@ export default {
   name: "appAside",
   data() {
     return {
-      defaultActive: "/auth",
+      defaultActive: "message",
       menuData: menuData,
       appHeight: 0,
     };
@@ -66,8 +69,8 @@ export default {
       this.appHeight = this.clientHeight - 120 + "px";
     },
     // 跳转路由
-    goRouterPath(path) {
-      this.$router.push({ path });
+    goRouterPath(menu) {
+      this.$router.push({ path: menu.path });
     }
   },
 };

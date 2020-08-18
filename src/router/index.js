@@ -30,10 +30,17 @@ const router = new VueRouter({
   routes
 });
 
+
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
+
+
 //全局守卫
 router.beforeEach((to, from, next)=> {
   //  获取当前用户是否再登录状态
-  console.log("全局的路由守卫","to：",to, "from：",from); 
+  // console.log("全局的路由守卫","to：",to, "from：",from); 
   next();
 });
 
