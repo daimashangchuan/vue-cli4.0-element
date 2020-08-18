@@ -22,9 +22,9 @@
       </el-container>
 
       <!-- 公共底部 -->
-      <el-footer v-if="isAppFooter">
+      <!-- <el-footer v-if="isAppFooter">
         <appFooter />
-      </el-footer>
+      </el-footer> -->
     </el-container>
   </div>
 </template>
@@ -63,6 +63,6 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 @import "./assets/style/default.less";
 </style>

@@ -67,7 +67,7 @@ export default {
     },
     // 设置侧边栏的 height
     setAsideHeight() {
-      this.appHeight = this.clientHeight - 120 + "px";
+      this.appHeight = this.clientHeight - 60 + "px";
     },
     // 跳转路由
     goRouterPath(menu) {

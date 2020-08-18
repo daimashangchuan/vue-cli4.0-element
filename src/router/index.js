@@ -1,7 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from '@/store';
-import { encode, decode } from "@/utils/util";
 
 Vue.use(VueRouter);
 
@@ -11,6 +9,12 @@ const routes = [
     name: "index",
     meta: { keepAlive: false },
     component: () => import("../views/index.vue")
+  },{
+    path: "*",
+    name: "notFount", 
+    meta: { keepAlive: false },
+    component: () => import("../views/errorPages/notFount.vue") 
+    // redirect: '/404',
   },{
     path: "/login",
     name: "login",
@@ -33,8 +37,8 @@ const router = new VueRouter({
 
 
 const originalPush = VueRouter.prototype.push
-   VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+  VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
 }
 
 

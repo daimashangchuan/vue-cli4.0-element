@@ -111,13 +111,5 @@ module.exports = {
       preProcessor: "less",
       patterns: [path.resolve(__dirname, "./src/assets/style/common.less")],
     },
-    // 可以通过 less 文件覆盖（文件路径为绝对路径）
-    less: {
-      modifyVars: {
-        hack: `true; @import "${[
-          path.resolve(__dirname, "./src/assets/style/vantUi.less"),
-        ]}";`,
-      },
-    },
   },
 };
