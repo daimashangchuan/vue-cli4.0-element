@@ -10,7 +10,7 @@ const routes = [
     path: "/",
     name: "index",
     meta: { keepAlive: false },
-    component: () => import("../views")
+    component: () => import("../views/index.vue")
   },{
     path: "/login",
     name: "login",
@@ -25,7 +25,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes
 });

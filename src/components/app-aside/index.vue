@@ -46,13 +46,14 @@ export default {
   name: "appAside",
   data() {
     return {
-      defaultActive: "message",
+      defaultActive: "/message",
       menuData: menuData,
       appHeight: 0,
     };
   },
   created() {
-    this.setAsideHeight()
+    this.setAsideHeight();
+    this.defaultActive = this.$route.path;
   },
   computed: {
     ...mapState("AppStores", ["clientHeight"]),

@@ -1,6 +1,6 @@
 <template>
   <div class="app-Header">
-    
+    <h1 @click="goHomePage">首页</h1>
   </div>
 </template>
 
@@ -12,7 +12,11 @@ export default {
   },
   created() {},
   computed: {},
-  methods: {},
+  methods: {
+    goHomePage() {
+      this.$router.replace({ path: '/' })
+    }
+  },
 };
 </script>
 
