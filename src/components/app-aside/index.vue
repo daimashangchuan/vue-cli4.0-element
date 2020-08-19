@@ -1,9 +1,12 @@
 <template>
   <div class="appAside">
+    <div class="asideTop" @click="$router.push('/')">
+      <img src="@/assets/images/logo.gif" alt="logo">
+      <h3>管理员权限</h3>
+    </div>
     <el-menu background-color="#545c64" text-color="#fff" 
       active-text-color="#ffd04b" :default-active="defaultActive" 
       @open="handleOpen" @close="handleClose" >
-
       <div v-for="(menuOne,index) in menuData" :key="index">
         <!-- 多级 -->
         <el-submenu v-if="menuOne.childs" :index="menuOne.name">
@@ -23,7 +26,6 @@
                 <span>{{ menu.title }}</span>
               </el-menu-item>
             </el-submenu>
-
             <!-- 二级 -->
             <el-menu-item v-if="!menuTwo.childs" @click="goRouterPath(menuTwo)" :index="menuTwo.path" :disabled='menuTwo.disabled'>
               <i :class="menuTwo.icon"></i>
@@ -86,6 +88,20 @@ export default {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
+  color: #fff;
+}
+.asideTop {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid #0a0303;
+  img {
+    width: 40px;
+    height: auto;
+    border-radius: 50%;
+  }
 }
 .el-menu {
   width: 100%;
