@@ -8,23 +8,26 @@ const routes = [
     path: "/",
     name: "index",
     meta: { keepAlive: false },
-    component: () => import("../views/index.vue")
-  },{
-    path: "*",
-    name: "notFount", 
-    meta: { keepAlive: false },
-    component: () => import("../views/errorPages/notFount.vue") 
-    // redirect: '/404',
-  },{
+    component: () => import("../views/index.vue"),
+  },
+  // {
+  //   path: "*",
+  //   name: "notFount",
+  //   meta: { keepAlive: false },
+  //   component: () => import("../views/errorPages/notFount.vue"),
+  //   // redirect: '/404',
+  // },
+  {
     path: "/login",
     name: "login",
     meta: { keepAlive: false },
-    component: () => import("../views/userEnter/login.vue")
-  },{
+    component: () => import("../views/userEnter/login.vue"),
+  },
+  {
     path: "/register",
     name: "register",
     meta: { keepAlive: false },
-    component: () => import("../views/userEnter/register.vue")
+    component: () => import("../views/userEnter/register.vue"),
   },
 ];
 
@@ -32,22 +35,19 @@ const router = new VueRouter({
   // mode: "history",
   mode: "hash",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
-
-const originalPush = VueRouter.prototype.push
-  VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
-}
-
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
 
 //全局守卫
-router.beforeEach((to, from, next)=> {
+router.beforeEach((to, from, next) => {
   //  获取当前用户是否再登录状态
-  // console.log("全局的路由守卫","to：",to, "from：",from); 
+  // console.log("全局的路由守卫","to：",to, "from：",from);
   next();
 });
-
 
 export default router;

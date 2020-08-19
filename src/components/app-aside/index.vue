@@ -1,6 +1,9 @@
 <template>
-  <div class="appAside" :style="{ height: appHeight }">
-    <el-menu :default-active="defaultActive" @open="handleOpen" @close="handleClose" :unique-opened="true">
+  <div class="appAside">
+    <el-menu background-color="#545c64" text-color="#fff" 
+      active-text-color="#ffd04b" :default-active="defaultActive" 
+      @open="handleOpen" @close="handleClose" >
+
       <div v-for="(menuOne,index) in menuData" :key="index">
         <!-- 多级 -->
         <el-submenu v-if="menuOne.childs" :index="menuOne.name">
@@ -80,8 +83,12 @@ export default {
 <style lang="less" scoped>
 .appAside {
   width: 100%;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+.el-menu {
+  width: 100%;
 }
 /*滚动条样式 start*/
 .appAside::-webkit-scrollbar {

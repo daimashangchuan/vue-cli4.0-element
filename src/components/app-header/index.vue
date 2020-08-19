@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {} from "@/api"
 export default {
   name: "appHeader",
   data() {
@@ -13,8 +14,13 @@ export default {
   created() {},
   computed: {},
   methods: {
+    // 回到首页
     goHomePage() {
       this.$router.replace({ path: '/' })
+    },
+    // 获取天气数据
+    getWeather() {
+
     }
   },
 };

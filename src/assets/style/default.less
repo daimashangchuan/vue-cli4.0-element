@@ -1,23 +1,21 @@
+
+@backAside:#545c64;
+@backFFF: #fff;
+@backEEE: #eee;
 #app {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background-color: #eeeeee;
+  background-color: @backFFF;
   box-sizing: border-box;
   overflow: hidden;
   color: #333;
   cursor: pointer;
 }
-.el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-}
 .el-aside {
-  background-color: #ffffff;
-  color: #333;
+  background-color: @backAside;
 }
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  border: 25px solid @backEEE;
   padding: 0;
 }

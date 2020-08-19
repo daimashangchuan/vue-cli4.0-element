@@ -1,17 +1,15 @@
 <template>
   <div id="app">
+    <!-- 公共侧边栏 -->
     <el-container>
-      <!-- 公共头部 -->
-      <el-header v-if="isAppHeader">
-        <appHeader />
-      </el-header>
-
-      <!-- 主体 -->
+      <el-aside v-if="isAppAside" style="width: 200px;">
+        <appAside />
+      </el-aside>
       <el-container>
-        <!-- 公共侧边栏 -->
-        <el-aside v-if="isAppAside" style="width: 200px;">
-          <appAside />
-        </el-aside>
+        <!-- 公共头部 -->
+        <el-header v-if="isAppHeader">
+          <appHeader />
+        </el-header>
         <!-- 内容 -->
         <el-main>
           <keep-alive>
@@ -19,12 +17,11 @@
           </keep-alive>
           <router-view v-if="!$route.meta.keepAlive && isRouterAlive" />
         </el-main>
+        <!-- 公共底部 -->
+        <el-footer v-if="isAppFooter">
+          <appFooter />
+        </el-footer>
       </el-container>
-
-      <!-- 公共底部 -->
-      <!-- <el-footer v-if="isAppFooter">
-        <appFooter />
-      </el-footer> -->
     </el-container>
   </div>
 </template>
@@ -53,12 +50,12 @@ export default {
     },
   },
   computed: {
-    ...mapState("AppStores",["isAppHeader","isAppFooter","isAppAside"])
+    ...mapState("AppStores", ["isAppHeader", "isAppFooter", "isAppAside", "isAppTabs"])
   },
   components: {
     appHeader: () => import("@/components/app-header"),
     appFooter: () => import("@/components/app-footer"),
-    appAside: () => import("@/components/app-aside")
+    appAside: () => import("@/components/app-aside"),
   }
 };
 </script>

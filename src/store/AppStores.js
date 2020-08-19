@@ -2,7 +2,8 @@ const state = {
   clientHeight: document.documentElement.clientHeight,
   isAppHeader: true,
   isAppFooter: true,
-  isAppAside: true
+  isAppAside: true,
+  isAppTabs: true
 };
 const mutations = {
   setAppPageShow(state, newState) {
@@ -10,6 +11,7 @@ const mutations = {
     state.isAppHeader = newState.isAppHeader;
     state.isAppFooter = newState.isAppFooter;
     state.isAppAside = newState.isAppAside;
+    state.isAppTabs = newState.isAppTabs;
   }
 };
 const actions = {};
